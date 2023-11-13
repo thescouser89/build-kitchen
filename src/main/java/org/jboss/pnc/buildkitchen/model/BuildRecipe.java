@@ -24,7 +24,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.HashSet;
@@ -43,6 +42,7 @@ public class BuildRecipe extends PanacheEntity {
     public Set<BuildTool> buildTools = new HashSet<>();
 
     @NotNull
+    @Column(columnDefinition = "TEXT")
     public String buildScript;
 
     public long memoryRequired;
@@ -55,6 +55,7 @@ public class BuildRecipe extends PanacheEntity {
     @OneToMany
     public Set<ShadedArtifact> shadedDependencies = new HashSet<>();
 
+    @Column(columnDefinition = "TEXT")
     public String discrepancyWithUpstream;
 
 
@@ -72,7 +73,7 @@ public class BuildRecipe extends PanacheEntity {
                 FROM BuildRecipe r
                 WHERE (
                        r.scmInfo.buildScmUrl = :nurl
-                    OR r.scmInfo.buildScmUrl = :nurl
+                    OR r.scmInfo.originScmUrl = :nurl
                   ) AND (
                         r.scmInfo.buildCommitId = :revision
                      OR r.scmInfo.originCommitId = :revision

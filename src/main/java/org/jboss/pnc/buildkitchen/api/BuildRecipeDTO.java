@@ -17,13 +17,11 @@
  */
 package org.jboss.pnc.buildkitchen.api;
 
-import jakarta.persistence.ManyToMany;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
-import org.jboss.pnc.buildkitchen.model.BuildTool;
 
 import java.util.Set;
 

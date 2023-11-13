@@ -23,6 +23,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "jakarta", uses = {ScmInfoMapper.class})
 public interface BuildRecipeMapper {
-    BuildRecipeDTO toResource(BuildRecipe person);
-    BuildRecipe toModel(BuildRecipeDTO person);
+    BuildRecipeDTO toResource(BuildRecipe buildRecipe);
+    BuildRecipe toModel(BuildRecipeDTO buildRecipe);
 }

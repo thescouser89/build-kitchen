@@ -23,6 +23,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "jakarta")
 public interface ScmInfoMapper {
-    ScmInfoDTO toResource(ScmInfo person);
-    ScmInfo toModel(ScmInfoDTO person);
+    ScmInfoDTO toResource(ScmInfo scmInfo);
+    ScmInfo toModel(ScmInfoDTO scmInfo);
 }
