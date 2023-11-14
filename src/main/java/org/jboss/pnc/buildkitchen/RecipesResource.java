@@ -25,6 +25,7 @@ import org.jboss.pnc.buildkitchen.api.ArtifactDTO;
 import org.jboss.pnc.buildkitchen.api.BuildRecipeDTO;
 import org.jboss.pnc.buildkitchen.api.BuildToolDTO;
 import org.jboss.pnc.buildkitchen.api.PNCBuild;
+import org.jboss.pnc.buildkitchen.api.PurlSha;
 import org.jboss.pnc.buildkitchen.api.Recipes;
 import org.jboss.pnc.buildkitchen.api.ScmInfoDTO;
 import org.jboss.pnc.buildkitchen.mapper.BuildRecipeMapper;
@@ -107,15 +108,15 @@ public class RecipesResource implements Recipes {
         return recipe.stream().map(bt -> BuildTool.getOrCreate(bt.identifier, bt.version)).collect(Collectors.toSet());
     }
 
-    private Map<String, Artifact> persistArtifacts(Set<ArtifactDTO> artifactDTOS){
-        HashSet<String> purls = artifactDTOS.stream().map(ArtifactDTO::getPurl).collect(Collectors.toCollection(HashSet::new));
-        HashMap<String, Artifact> artifacts = new HashMap<>();
+    private Map<PurlSha, Artifact> persistArtifacts(Set<ArtifactDTO> artifactDTOS){
+        HashSet<PurlSha> purls = artifactDTOS.stream().map(ArtifactDTO::getPurlSha).collect(Collectors.toCollection(HashSet::new));
+        HashMap<PurlSha, Artifact> artifacts = new HashMap<>();
         artifacts.putAll(Artifact.findByPurls(purls));
         purls.removeAll(artifacts.keySet());
-        for (String purl : purls) {
-            Artifact artifact = new Artifact(purl);
+        for (PurlSha purlSha : purls) {
+            Artifact artifact = new Artifact(purlSha);
             artifact.persist();
-            artifacts.put(purl, artifact);
+            artifacts.put(purlSha, artifact);
         }
         return artifacts;
     }

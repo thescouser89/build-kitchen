@@ -24,7 +24,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
-import org.jboss.pnc.buildkitchen.model.BuildRecipe;
 
 import java.time.Instant;
 import java.util.Set;

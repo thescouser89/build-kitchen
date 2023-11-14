@@ -15,14 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.pnc.buildkitchen.mapper;
+package org.jboss.pnc.buildkitchen.api;
 
-import org.jboss.pnc.buildkitchen.api.BuildToolDTO;
-import org.jboss.pnc.buildkitchen.model.BuildTool;
-import org.mapstruct.Mapper;
-
-@Mapper(componentModel = "jakarta")
-public interface BuildToolMapper {
-    BuildToolDTO toResource(BuildTool buildTool);
-    BuildTool toModel(BuildToolDTO buildTool);
+public record PurlSha(String purl, String sha256) {
 }

@@ -2,13 +2,8 @@ package org.jboss.pnc.buildkitchen;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import org.jboss.pnc.buildkitchen.api.BuildRecipeDTO;
 import org.jboss.pnc.buildkitchen.api.Lookup;
-import org.jboss.pnc.buildkitchen.api.ScmInfoDTO;
 import org.jboss.pnc.buildkitchen.mapper.BuildRecipeMapper;
 import org.jboss.pnc.buildkitchen.model.BuildRecipe;
 

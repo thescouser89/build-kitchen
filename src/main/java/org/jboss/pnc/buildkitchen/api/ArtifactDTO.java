@@ -17,6 +17,7 @@
  */
 package org.jboss.pnc.buildkitchen.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +32,12 @@ public class ArtifactDTO {
 
     @NotNull
     String purl;
+
+    @NotNull
+    String sha256;
+
+    @JsonIgnore
+    public PurlSha getPurlSha(){
+        return new PurlSha(purl, sha256);
+    }
 }
