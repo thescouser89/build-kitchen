@@ -78,8 +78,8 @@ public class RecipesResourceTest {
                 .buildTools(Set.of(BuildToolDTO.builder().identifier("JAVA").version("11").build()))
                 .image("pnc-image-java11")
                 .memory(2 * 1024 * 1024 * 1023)
-                .builtArtifacts(Set.of(new ArtifactDTO("pkg:maven/junit/junit@1.2.3.redhat-00001"),
-                        new ArtifactDTO("pkg:maven/junit/junit-runner@1.2.3.redhat-00001")))
+                .builtArtifacts(Set.of(new ArtifactDTO("pkg:maven/junit/junit@1.2.3.redhat-00001", "123456789012345678901234567890ab"),
+                        new ArtifactDTO("pkg:maven/junit/junit-runner@1.2.3.redhat-00001", "123456789012345678901234567890cd")))
                 .versionGenerated("1.2.3.redhat-00001")
                 .build();
 

@@ -57,7 +57,7 @@ public class Artifact extends PanacheEntity {
     public static Map<PurlSha, Artifact> findByPurls(Set<PurlSha> purls) {
         List<PurlSha> purlShas = new ArrayList<>(purls);
         String query = "FROM Artifact a WHERE ";
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         for (int i = 0; i< purlShas.size(); i++){
             if(i > 0) {
                 query += " OR ";
@@ -69,7 +69,6 @@ public class Artifact extends PanacheEntity {
             params.put(purlKey, purlSha.purl());
             params.put(shaKey, purlSha.sha256());
         }
-
 
         return find(query, params).<Artifact>stream()
                 .collect(Collectors.toMap(Artifact::getPurlSha, Function.identity()));
