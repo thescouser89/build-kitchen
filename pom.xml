@@ -10,12 +10,15 @@
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <quarkus.package.type>uber-jar</quarkus.package.type>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.5.0</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.1.2</surefire-plugin.version>
     <mapstruct.version>1.5.3.Final</mapstruct.version>
+    <version.net.revelc.code.formatter.formatter-maven-plugin>2.21.0</version.net.revelc.code.formatter.formatter-maven-plugin>
+    <version.com.mycila>4.1</version.com.mycila>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -100,6 +103,11 @@
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus.platform.version}</version>
         <extensions>true</extensions>
+        <configuration>
+            <finalName>build-kitchen</finalName>
+            <!-- needed to publish to maven central -->
+            <skipOriginalJarRename>true</skipOriginalJarRename>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -148,6 +156,75 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>net.revelc.code.formatter</groupId>
+        <artifactId>formatter-maven-plugin</artifactId>
+        <version>${version.net.revelc.code.formatter.formatter-maven-plugin}</version>
+        <configuration>
+          <configFile>https://raw.githubusercontent.com/project-ncl/ide-config/master/eclipse/jboss-java-formatter.xml</configFile>
+          <lineEnding>LF</lineEnding>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${version.com.mycila}</version>
+        <configuration>
+          <excludes>
+            <exclude>.cache/*</exclude>
+            <exclude>.vs*/*</exclude>
+            <exclude>LICENSE</exclude>
+            <exclude>lsp/log/*.log</exclude>
+            <exclude>src/main/docker/Dockerfile.jvm</exclude>
+            <exclude>src/main/docker/Dockerfile.native</exclude>
+          </excludes>
+          <inlineHeader><![CDATA[Copyright (C) ${project.inceptionYear} Red Hat, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.]]></inlineHeader>
+          <mapping>
+            <dockerignore>SCRIPT_STYLE</dockerignore>
+            <gitattributes>SCRIPT_STYLE</gitattributes>
+            <java>SLASHSTAR_STYLE</java>
+            <jvm>SCRIPT_STYLE</jvm>
+            <native>SCRIPT_STYLE</native>
+          </mapping>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <releaseProfiles>empty-javadoc-jar,gpg-sign</releaseProfiles>
+          <stagingRepository>https://oss.sonatype.org/service/local/staging/deploy/maven2/</stagingRepository>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
   <profiles>
