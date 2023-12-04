@@ -21,8 +21,9 @@ import org.jboss.pnc.buildkitchen.api.BuildRecipeDTO;
 import org.jboss.pnc.buildkitchen.model.BuildRecipe;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "jakarta", uses = {ScmInfoMapper.class})
+@Mapper(componentModel = "jakarta", uses = { ScmInfoMapper.class })
 public interface BuildRecipeMapper {
     BuildRecipeDTO toResource(BuildRecipe buildRecipe);
+
     BuildRecipe toModel(BuildRecipeDTO buildRecipe);
 }

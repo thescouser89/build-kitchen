@@ -42,13 +42,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 @ApplicationScoped
 @Transactional
 public class RecipesResource implements Recipes {
     @Inject
     BuildRecipeMapper mapper;
-
 
     @Override
     public BuildRecipeDTO getSpecific(long id) {
@@ -101,15 +99,22 @@ public class RecipesResource implements Recipes {
     }
 
     private static ScmInfo getScmInfo(ScmInfoDTO scmInfoDto) {
-        return ScmInfo.getOrCreate(scmInfoDto.getBuildScmUrl(), scmInfoDto.getBuildCommitId(), scmInfoDto.getOriginScmUrl(), scmInfoDto.getOriginCommitId(), scmInfoDto.getOriginRevision());
+        return ScmInfo.getOrCreate(
+                scmInfoDto.getBuildScmUrl(),
+                scmInfoDto.getBuildCommitId(),
+                scmInfoDto.getOriginScmUrl(),
+                scmInfoDto.getOriginCommitId(),
+                scmInfoDto.getOriginRevision());
     }
 
     private static Set<BuildTool> getBuildTools(Set<BuildToolDTO> recipe) {
         return recipe.stream().map(bt -> BuildTool.getOrCreate(bt.identifier, bt.version)).collect(Collectors.toSet());
     }
 
-    private Map<PurlSha, Artifact> persistArtifacts(Set<ArtifactDTO> artifactDTOS){
-        HashSet<PurlSha> purls = artifactDTOS.stream().map(ArtifactDTO::getPurlSha).collect(Collectors.toCollection(HashSet::new));
+    private Map<PurlSha, Artifact> persistArtifacts(Set<ArtifactDTO> artifactDTOS) {
+        HashSet<PurlSha> purls = artifactDTOS.stream()
+                .map(ArtifactDTO::getPurlSha)
+                .collect(Collectors.toCollection(HashSet::new));
         HashMap<PurlSha, Artifact> artifacts = new HashMap<>();
         artifacts.putAll(Artifact.findByPurls(purls));
         purls.removeAll(artifacts.keySet());

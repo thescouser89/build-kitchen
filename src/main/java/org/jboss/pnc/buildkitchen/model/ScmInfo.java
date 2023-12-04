@@ -27,7 +27,9 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"buildScmUrl", "buildCommitId", "originScmUrl", "originCommitId"}))
+@Table(
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = { "buildScmUrl", "buildCommitId", "originScmUrl", "originCommitId" }))
 public class ScmInfo extends PanacheEntity {
 
     @NotNull
@@ -44,9 +46,15 @@ public class ScmInfo extends PanacheEntity {
 
     public String originRevision;
 
-    public ScmInfo() {}
+    public ScmInfo() {
+    }
 
-    public ScmInfo(String buildScmUrl, String buildCommitId, String originScmUrl, String originCommitId, String originRevision) {
+    public ScmInfo(
+            String buildScmUrl,
+            String buildCommitId,
+            String originScmUrl,
+            String originCommitId,
+            String originRevision) {
         this.buildScmUrl = buildScmUrl;
         this.buildCommitId = buildCommitId;
         this.originScmUrl = originScmUrl;
@@ -62,14 +70,20 @@ public class ScmInfo extends PanacheEntity {
         this.originScmUrl = normalizeUrl(originScmUrl);
     }
 
-    public static String normalizeUrl(String url){
+    public static String normalizeUrl(String url) {
         return url; // TODO: normalizeURL
     }
 
-    public static ScmInfo getOrCreate(String buildScmUrl, String buildCommitId, String originScmUrl, String originCommitId, String originRevision) {
+    public static ScmInfo getOrCreate(
+            String buildScmUrl,
+            String buildCommitId,
+            String originScmUrl,
+            String originCommitId,
+            String originRevision) {
         String normalizedBuildScmUrl = ScmInfo.normalizeUrl(buildScmUrl);
         String normalizedOriginScmUrl = ScmInfo.normalizeUrl(originScmUrl);
-        Optional<ScmInfo> entity = find("""
+        Optional<ScmInfo> entity = find(
+                """
                         FROM ScmInfo scm
                         WHERE
                                 scm.buildScmUrl = :buildScmUrl
@@ -80,11 +94,18 @@ public class ScmInfo extends PanacheEntity {
                 Parameters.with("buildScmUrl", normalizedBuildScmUrl)
                         .and("buildCommitId", buildCommitId)
                         .and("originScmUrl", normalizedOriginScmUrl)
-                        .and("originCommitId", originCommitId)).singleResultOptional();
-        return entity.orElseGet(() -> createNew(buildScmUrl, buildCommitId, originScmUrl, originCommitId, originRevision));
+                        .and("originCommitId", originCommitId))
+                .singleResultOptional();
+        return entity
+                .orElseGet(() -> createNew(buildScmUrl, buildCommitId, originScmUrl, originCommitId, originRevision));
     }
 
-    public static ScmInfo createNew(String buildScmUrl, String buildCommitId, String originScmUrl, String originCommitId, String originRevision) {
+    public static ScmInfo createNew(
+            String buildScmUrl,
+            String buildCommitId,
+            String originScmUrl,
+            String originCommitId,
+            String originRevision) {
         ScmInfo scmInfo = new ScmInfo(buildScmUrl, buildCommitId, originScmUrl, originCommitId, originRevision);
         persist(scmInfo);
         return scmInfo;

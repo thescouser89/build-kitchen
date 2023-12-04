@@ -33,19 +33,15 @@ public class BuildTool extends PanacheEntity {
     @NotNull
     public String version;
 
-
     public static BuildTool getOrCreate(String identifier, String version) {
         Optional<BuildTool> entity = find("""
-                        FROM BuildTool bt
-                        WHERE
-                                bt.identifier = :identifier
-                            AND bt.version = :version
-                        """,
-                Parameters.with("identifier", identifier)
-                        .and("version", version)).singleResultOptional();
+                FROM BuildTool bt
+                WHERE
+                        bt.identifier = :identifier
+                    AND bt.version = :version
+                """, Parameters.with("identifier", identifier).and("version", version)).singleResultOptional();
         return entity.orElseGet(() -> createNew(identifier, version));
     }
-
 
     public static BuildTool createNew(String identifier, String version) {
         BuildTool buildTool = new BuildTool();

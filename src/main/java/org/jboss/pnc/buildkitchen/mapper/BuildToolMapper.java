@@ -24,5 +24,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "jakarta")
 public interface BuildToolMapper {
     BuildToolDTO toResource(BuildTool buildTool);
+
     BuildTool toModel(BuildToolDTO buildTool);
 }

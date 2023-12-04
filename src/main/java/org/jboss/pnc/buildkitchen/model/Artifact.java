@@ -33,7 +33,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"purl", "sha256"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "purl", "sha256" }))
 public class Artifact extends PanacheEntity {
 
     @NotNull
@@ -42,7 +42,7 @@ public class Artifact extends PanacheEntity {
     @NotNull
     public String sha256;
 
-    public PurlSha getPurlSha(){
+    public PurlSha getPurlSha() {
         return new PurlSha(purl, sha256);
     }
 
@@ -58,8 +58,8 @@ public class Artifact extends PanacheEntity {
         List<PurlSha> purlShas = new ArrayList<>(purls);
         String query = "FROM Artifact a WHERE ";
         Map<String, Object> params = new HashMap<>();
-        for (int i = 0; i< purlShas.size(); i++){
-            if(i > 0) {
+        for (int i = 0; i < purlShas.size(); i++) {
+            if (i > 0) {
                 query += " OR ";
             }
             String purlKey = "purl" + i;
@@ -70,7 +70,7 @@ public class Artifact extends PanacheEntity {
             params.put(shaKey, purlSha.sha256());
         }
 
-        return find(query, params).<Artifact>stream()
+        return find(query, params).<Artifact> stream()
                 .collect(Collectors.toMap(Artifact::getPurlSha, Function.identity()));
     }
 }

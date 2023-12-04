@@ -17,6 +17,9 @@ public class LookupResource implements Lookup {
 
     @Override
     public List<BuildRecipeDTO> lookupByScmRevision(String url, String revision) {
-        return BuildRecipe.findByScmInfo(url, revision).stream().map(buildRecipeMapper::toResource).collect(Collectors.toList());
+        return BuildRecipe.findByScmInfo(url, revision)
+                .stream()
+                .map(buildRecipeMapper::toResource)
+                .collect(Collectors.toList());
     }
 }

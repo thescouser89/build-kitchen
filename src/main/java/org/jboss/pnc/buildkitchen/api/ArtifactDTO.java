@@ -37,7 +37,7 @@ public class ArtifactDTO {
     String sha256;
 
     @JsonIgnore
-    public PurlSha getPurlSha(){
+    public PurlSha getPurlSha() {
         return new PurlSha(purl, sha256);
     }
 }

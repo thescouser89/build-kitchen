@@ -58,16 +58,14 @@ public class BuildRecipe extends PanacheEntity {
     @Column(columnDefinition = "TEXT")
     public String discrepancyWithUpstream;
 
-
-    public static List<BuildRecipe> findByScmInfo(ScmInfo scmInfo){
+    public static List<BuildRecipe> findByScmInfo(ScmInfo scmInfo) {
         return find("""
                 FROM BuildRecipe r
                 WHERE r.scmInfo = :scmInfo
-                """,
-                Parameters.with("scmInfo", scmInfo)).list();
+                """, Parameters.with("scmInfo", scmInfo)).list();
     }
 
-    public static List<BuildRecipe> findByScmInfo(String url, String revision){
+    public static List<BuildRecipe> findByScmInfo(String url, String revision) {
         String normalizedUrl = ScmInfo.normalizeUrl(url);
         return find("""
                 FROM BuildRecipe r
@@ -79,7 +77,6 @@ public class BuildRecipe extends PanacheEntity {
                      OR r.scmInfo.originCommitId = :revision
                      OR r.scmInfo.originRevision = :revision
                   )
-                """,
-                Parameters.with("nurl", normalizedUrl).and("revision", revision)).list();
+                """, Parameters.with("nurl", normalizedUrl).and("revision", revision)).list();
     }
 }
