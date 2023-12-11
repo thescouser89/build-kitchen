@@ -27,6 +27,7 @@
   <inceptionYear>2023</inceptionYear>
   <properties>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
+    <mapstruct.version>1.5.3.Final</mapstruct.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -36,9 +37,8 @@
     <quarkus.platform.version>3.5.0</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.1.2</surefire-plugin.version>
-    <mapstruct.version>1.5.3.Final</mapstruct.version>
-    <version.net.revelc.code.formatter.formatter-maven-plugin>2.21.0</version.net.revelc.code.formatter.formatter-maven-plugin>
     <version.com.mycila>4.1</version.com.mycila>
+    <version.net.revelc.code.formatter.formatter-maven-plugin>2.21.0</version.net.revelc.code.formatter.formatter-maven-plugin>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -107,6 +107,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
@@ -123,11 +127,6 @@
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus.platform.version}</version>
         <extensions>true</extensions>
-        <configuration>
-            <finalName>build-kitchen</finalName>
-            <!-- needed to publish to maven central -->
-            <skipOriginalJarRename>true</skipOriginalJarRename>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -137,6 +136,11 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <finalName>build-kitchen</finalName>
+          <!-- needed to publish to maven central -->
+          <skipOriginalJarRename>true</skipOriginalJarRename>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -180,10 +184,6 @@
         <groupId>net.revelc.code.formatter</groupId>
         <artifactId>formatter-maven-plugin</artifactId>
         <version>${version.net.revelc.code.formatter.formatter-maven-plugin}</version>
-        <configuration>
-          <configFile>https://raw.githubusercontent.com/project-ncl/ide-config/master/eclipse/jboss-java-formatter.xml</configFile>
-          <lineEnding>LF</lineEnding>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -191,11 +191,22 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <configFile>https://raw.githubusercontent.com/project-ncl/ide-config/master/eclipse/jboss-java-formatter.xml</configFile>
+          <lineEnding>LF</lineEnding>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
         <version>${version.com.mycila}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <properties>
             <copyright-years>${project.inceptionYear}-2023</copyright-years>
@@ -208,7 +219,7 @@
             <exclude>src/main/docker/Dockerfile.jvm</exclude>
             <exclude>src/main/docker/Dockerfile.native</exclude>
           </excludes>
-          <inlineHeader><![CDATA[JBoss, Home of Professional Open Source.
+          <inlineHeader>JBoss, Home of Professional Open Source.
 Copyright ${copyright-years} Red Hat, Inc., and individual contributors
 as indicated by the @author tags.
 
@@ -222,8 +233,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License.
-]]></inlineHeader>
+limitations under the License.</inlineHeader>
           <mapping>
             <dockerignore>SCRIPT_STYLE</dockerignore>
             <gitattributes>SCRIPT_STYLE</gitattributes>
@@ -232,16 +242,8 @@ limitations under the License.
             <native>SCRIPT_STYLE</native>
           </mapping>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -250,7 +252,6 @@ limitations under the License.
           <stagingRepository>https://oss.sonatype.org/service/local/staging/deploy/maven2/</stagingRepository>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
   <profiles>
