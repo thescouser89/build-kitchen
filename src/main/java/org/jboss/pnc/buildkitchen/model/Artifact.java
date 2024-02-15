@@ -61,6 +61,9 @@ public class Artifact extends PanacheEntity {
     }
 
     public static Map<PurlSha, Artifact> findByPurls(Set<PurlSha> purls) {
+        if (purls.isEmpty()) {
+            return Map.of();
+        }
         List<PurlSha> purlShas = new ArrayList<>(purls);
         String query = "FROM Artifact a WHERE ";
         Map<String, Object> params = new HashMap<>();
