@@ -31,19 +31,21 @@ import java.nio.file.Path;
 @ApplicationScoped
 public class AmqpUmbClientOptionProducer {
 
-    @ConfigProperty(name = "build-kitchen.amqp.key")
+    @ConfigProperty(name = "build-kitchen.amqp.key", defaultValue = "null")
     Path keyPath;
-    @ConfigProperty(name = "build-kitchen.amqp.pass")
+    @ConfigProperty(name = "build-kitchen.amqp.pass", defaultValue = "null")
     String pass;
 
     @Produces
     @Identifier("umb")
     public AmqpClientOptions getClientOptions() {
         log.info("Setting up AMQP client options");
-
-        return new AmqpClientOptions().setSsl(true)
+        AmqpClientOptions amqpClientOptions = new AmqpClientOptions().setSsl(true)
                 .setConnectTimeout(30 * 1000)
-                .setReconnectInterval(5 * 1000)
-                .setPfxKeyCertOptions(new PfxOptions().setPath(keyPath.toString()).setPassword(pass));
+                .setReconnectInterval(5 * 1000);
+        if (keyPath != null && pass != null) {
+            amqpClientOptions.setPfxKeyCertOptions(new PfxOptions().setPath(keyPath.toString()).setPassword(pass));
+        }
+        return amqpClientOptions;
     }
 }
