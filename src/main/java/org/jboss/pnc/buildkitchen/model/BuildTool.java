@@ -27,9 +27,17 @@ import java.util.Optional;
 @Entity
 public class BuildTool extends PanacheEntity {
 
+    /**
+     * Name of the tool.
+     * <p>
+     * E.g. JDK, gradle, maven, SBT, ant
+     */
     @NotNull
     public String identifier;
 
+    /**
+     * Major version of the tool.
+     */
     @NotNull
     public String version;
 

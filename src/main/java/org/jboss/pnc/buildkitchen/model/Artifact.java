@@ -36,9 +36,15 @@ import java.util.stream.Collectors;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "purl", "sha256" }))
 public class Artifact extends PanacheEntity {
 
+    /**
+     * Package URL identifying the artifact.
+     */
     @NotNull
     public String purl;
 
+    /**
+     * SHA256 checksum of the artifacts.
+     */
     @NotNull
     public String sha256;
 

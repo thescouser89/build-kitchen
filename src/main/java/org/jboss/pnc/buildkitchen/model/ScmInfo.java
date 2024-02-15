@@ -32,18 +32,42 @@ import java.util.Optional;
                 columnNames = { "buildScmUrl", "buildCommitId", "originScmUrl", "originCommitId" }))
 public class ScmInfo extends PanacheEntity {
 
+    /**
+     * Normalized URL of sources that were actually used for running the build.
+     * <p>
+     * E.g. internal URL in PNC.
+     */
     @NotNull
     public String buildScmUrl;
 
+    /**
+     * Revision that was actually used for running the build. It is and URL after applying any changes.
+     * <p>
+     * E.g. internal revision with alignment done in PNC.
+     */
     @NotNull
     public String buildCommitId;
 
+    /**
+     * Normalized URL of the original source code.
+     * <p>
+     * E.g. midstream or upstream URL in PNC.
+     */
     @NotNull
     public String originScmUrl;
 
+    /**
+     * Revision that was used as input for the system.
+     * <p>
+     * E.g. midstream or upstream revision before applying alignment in PNC.
+     */
     @NotNull
     public String originCommitId;
 
+    /**
+     * Tag or branch name that the sources were taken from. This may be the input from user, that gets resolved to
+     * {@link ScmInfo#originCommitId}.
+     */
     public String originRevision;
 
     public ScmInfo() {

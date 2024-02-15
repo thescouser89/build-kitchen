@@ -33,28 +33,53 @@ import java.util.Set;
 @Entity
 public class BuildRecipe extends PanacheEntity {
 
+    /**
+     * Source Code Management coordinates used in this build recipe.
+     */
     @NotNull
     @ManyToOne
     public ScmInfo scmInfo;
 
+    /**
+     * Collections of build tools used for running this recipe.
+     */
     @NotNull
     @ManyToMany
     public Set<BuildTool> buildTools = new HashSet<>();
 
+    /**
+     * Script that is used for execution of the build recipe.
+     */
     @NotNull
     @Column(columnDefinition = "TEXT")
     public String buildScript;
 
+    /**
+     * How much memory is needed for executing the build recipe in bytes.
+     */
     public long memoryRequired;
 
+    /**
+     * Builds that were produced by (a version of) this recipe.
+     */
     @NotNull
     @OneToMany(mappedBy = "recipe")
     public Set<Build> builds = new HashSet<>();
 
+    /**
+     * List of artifacts that were shaded into the output.
+     * <p>
+     * JBS specific.
+     */
     @NotNull
     @OneToMany
     public Set<ShadedArtifact> shadedDependencies = new HashSet<>();
 
+    /**
+     * Difference of the resulting artifacts with upstram. Diff-like format.
+     * <p>
+     * JBS specific.
+     */
     @Column(columnDefinition = "TEXT")
     public String discrepancyWithUpstream;
 

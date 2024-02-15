@@ -34,29 +34,58 @@ import java.util.Set;
 @Entity
 public class Build extends PanacheEntity {
 
+    /**
+     * Recipe that was used to produce this build. Note: the recipe might have been updated since this build was
+     * produced.
+     */
     @NotNull
     @ManyToOne
     public BuildRecipe recipe;
 
+    /**
+     * Which build system produced the build.
+     */
     @NotNull
     @Enumerated(EnumType.STRING)
     public BuildGenerator generator;
 
+    /**
+     * ID of the build in the build system that produced the build.
+     */
     @NotNull
     public String buildId;
 
+    /**
+     * Artifacts that were produced by the build.
+     */
     @NotNull
     @ManyToMany
     public Set<Artifact> builtArtifacts = new HashSet<>();
 
+    /**
+     * What version of artifacts was produced by the build.
+     */
     public String versionGenerated;
 
+    /**
+     * Time when the build finished.
+     */
     @NotNull
     public Instant buildTime;
+
+    /**
+     * How long the build took in seconds.
+     */
     public long buildDuration;
 
+    /**
+     * How much memory was needed for the build in bytes.
+     */
     public long memory;
 
+    /**
+     * Name and tag of the image used for the build.
+     */
     public String image;
 
     @NotNull
