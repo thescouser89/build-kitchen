@@ -18,6 +18,7 @@
 package org.jboss.pnc.buildkitchen.api;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -36,4 +37,8 @@ public interface Recipes {
     @POST
     @Path("/pnc-build")
     BuildRecipeDTO submitPNCBuild(@Valid PNCBuild build);
+
+    @POST
+    @Path("/pnc-build-by-id")
+    BuildRecipeDTO submitPNCBuild(@NotEmpty String buildId);
 }

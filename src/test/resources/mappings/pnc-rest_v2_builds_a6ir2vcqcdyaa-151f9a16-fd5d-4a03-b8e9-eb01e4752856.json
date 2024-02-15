@@ -1,0 +1,24 @@
+{
+  "id" : "151f9a16-fd5d-4a03-b8e9-eb01e4752856",
+  "name" : "pnc-rest_v2_builds_a6ir2vcqcdyaa",
+  "request" : {
+    "url" : "/pnc-rest/v2/builds/A6IR2VCQCDYAA",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"id\":\"A6IR2VCQCDYAA\",\"submitTime\":\"2024-02-13T14:25:57.982Z\",\"startTime\":\"2024-02-13T14:25:58.140Z\",\"endTime\":\"2024-02-13T14:29:32.388Z\",\"progress\":\"FINISHED\",\"status\":\"SUCCESS\",\"buildContentId\":\"build-A6IR2VCQCDYAA\",\"temporaryBuild\":true,\"alignmentPreference\":\"PREFER_PERSISTENT\",\"scmUrl\":\"https://example.com/gerrit/eclipse-ee4j/jaxb-ri.git\",\"scmRevision\":\"abcdef0123456789abcdef0123456789abcdef01\",\"scmTag\":\"4.0.4.temporary-redhat-00001\",\"buildOutputChecksum\":\"0123456789abcdef0123456789abcdef\",\"lastUpdateTime\":\"2024-02-13T14:29:34.429Z\",\"scmBuildConfigRevision\":\"123456789abc123456789abc123465789abc1234\",\"scmBuildConfigRevisionInternal\":false,\"project\":{\"id\":\"807\",\"name\":\"eclipse-ee4j-jaxb-ri\",\"description\":null,\"issueTrackerUrl\":null,\"projectUrl\":null,\"engineeringTeam\":null,\"technicalLeader\":null},\"scmRepository\":{\"id\":\"815\",\"internalUrl\":\"git+ssh://example.com/eclipse-ee4j/jaxb-ri.git\",\"externalUrl\":\"https://github.com/eclipse-ee4j/jaxb-ri.git\",\"preBuildSyncEnabled\":true},\"environment\":{\"id\":\"456\",\"name\":\"OpenJDK 11.0; Mvn 3.6.3\",\"description\":\"OpenJDK 11.0; Mvn 3.6.3 [builder:1.0.0]\",\"systemImageRepositoryUrl\":\"example.com/namespace\",\"systemImageId\":\"builder:1.0.0\",\"attributes\":{\"JDK\":\"11\",\"MAVEN\":\"3.6.3\",\"OS\":\"Linux\"},\"systemImageType\":\"DOCKER_IMAGE\",\"deprecated\":false,\"hidden\":false},\"attributes\":{\"BREW_BUILD_VERSION\":\"4.0.4.temporary-redhat-00001\",\"BREW_BUILD_NAME\":\"com.sun.xml.bind.mvn:jaxb-parent\"},\"user\":{\"id\":\"230\",\"username\":\"yomama\"},\"buildConfigRevision\":{\"id\":\"14228\",\"rev\":2692685,\"name\":\"jaxb-core-4.0.4\",\"buildScript\":\"mvn clean deploy\",\"scmRevision\":\"4.0.4-RI\",\"creationTime\":\"2024-02-13T14:25:55.275Z\",\"modificationTime\":\"2024-02-13T14:25:55.256Z\",\"buildType\":\"MVN\",\"defaultAlignmentParams\":\"-DdependencySource=REST -DrepoRemovalBackup=repositories-backup.xml -DversionSuffixStrip= -DreportNonAligned=true -DstrictPropertyValidation=true\",\"brewPullActive\":false},\"productMilestone\":null,\"groupBuild\":{\"id\":\"47813\",\"startTime\":\"2024-02-13T14:25:57.982Z\",\"endTime\":\"2024-02-13T14:29:35.030Z\",\"status\":\"SUCCESS\",\"temporaryBuild\":true,\"alignmentPreference\":\"PREFER_PERSISTENT\"},\"noRebuildCause\":null}",
+    "headers" : {
+      "access-control-allow-origin" : "*",
+      "date" : "Tue, 13 Feb 2024 15:26:34 GMT",
+      "access-control-allow-credentials" : "true",
+      "access-control-max-age" : "1",
+      "access-control-allow-headers" : "accept, authorization,  content-type, x-requested-with",
+      "content-type" : "application/json",
+      "access-control-allow-methods" : "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+    }
+  },
+  "uuid" : "151f9a16-fd5d-4a03-b8e9-eb01e4752856",
+  "persistent" : true,
+  "insertionIndex" : 4
+}

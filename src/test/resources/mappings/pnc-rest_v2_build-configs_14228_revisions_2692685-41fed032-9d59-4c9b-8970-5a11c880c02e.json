@@ -1,0 +1,24 @@
+{
+  "id" : "41fed032-9d59-4c9b-8970-5a11c880c02e",
+  "name" : "pnc-rest_v2_build-configs_14228_revisions_2692685",
+  "request" : {
+    "url" : "/pnc-rest/v2/build-configs/14228/revisions/2692685",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"id\":\"14228\",\"rev\":2692685,\"name\":\"jaxb-core-4.0.4\",\"buildScript\":\"mvn clean deploy\",\"scmRevision\":\"4.0.4-RI\",\"creationTime\":\"2024-02-13T14:25:55.275Z\",\"modificationTime\":\"2024-02-13T14:25:55.256Z\",\"buildType\":\"MVN\",\"defaultAlignmentParams\":\"-DdependencySource=REST -DrepoRemovalBackup=repositories-backup.xml -DversionSuffixStrip= -DreportNonAligned=true -DstrictPropertyValidation=true\",\"brewPullActive\":false,\"scmRepository\":{\"id\":\"815\",\"internalUrl\":\"git+ssh://git.example.com/eclipse-ee4j/jaxb-ri.git\",\"externalUrl\":\"https://github.com/eclipse-ee4j/jaxb-ri.git\",\"preBuildSyncEnabled\":true},\"project\":{\"id\":\"807\",\"name\":\"eclipse-ee4j-jaxb-ri\",\"description\":null,\"issueTrackerUrl\":null,\"projectUrl\":null,\"engineeringTeam\":null,\"technicalLeader\":null},\"environment\":{\"id\":\"456\",\"name\":\"OpenJDK 11.0; Mvn 3.6.3\",\"description\":\"OpenJDK 11.0; Mvn 3.6.3 [builder:1.0.0]\",\"systemImageRepositoryUrl\":\"example.com/namespace\",\"systemImageId\":\"builder:1.0.0\",\"attributes\":{\"JDK\":\"11\",\"MAVEN\":\"3.6.3\",\"OS\":\"Linux\"},\"systemImageType\":\"DOCKER_IMAGE\",\"deprecated\":false,\"hidden\":false},\"parameters\":{\"ALIGNMENT_PARAMETERS\":\"--file=jaxb-ri/pom.xml\",\"BUILDER_POD_MEMORY\":\"3.1415\"},\"creationUser\":{\"id\":\"230\",\"username\":\"yomama\"},\"modificationUser\":{\"id\":\"230\",\"username\":\"yomama\"}}",
+    "headers" : {
+      "access-control-allow-origin" : "*",
+      "date" : "Tue, 13 Feb 2024 15:26:35 GMT",
+      "access-control-allow-credentials" : "true",
+      "access-control-max-age" : "1",
+      "access-control-allow-headers" : "accept, authorization,  content-type, x-requested-with",
+      "content-type" : "application/json",
+      "access-control-allow-methods" : "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+    }
+  },
+  "uuid" : "41fed032-9d59-4c9b-8970-5a11c880c02e",
+  "persistent" : true,
+  "insertionIndex" : 3
+}

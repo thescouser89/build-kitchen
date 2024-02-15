@@ -48,6 +48,9 @@ public class RecipesResource implements Recipes {
     @Inject
     BuildRecipeMapper mapper;
 
+    @Inject
+    PncImporter pncImporter;
+
     @Override
     public BuildRecipeDTO getSpecific(long id) {
         return mapper.toResource(BuildRecipe.findById(id));
@@ -98,6 +101,11 @@ public class RecipesResource implements Recipes {
         return mapper.toResource(buildRecipe);
     }
 
+    @Override
+    public BuildRecipeDTO submitPNCBuild(String buildId) {
+        return mapper.toResource(pncImporter.importBuild(buildId));
+    }
+
     private static ScmInfo getScmInfo(ScmInfoDTO scmInfoDto) {
         return ScmInfo.getOrCreate(
                 scmInfoDto.getBuildScmUrl(),
@@ -107,7 +115,7 @@ public class RecipesResource implements Recipes {
                 scmInfoDto.getOriginRevision());
     }
 
-    private static Set<BuildTool> getBuildTools(Set<BuildToolDTO> recipe) {
+    public static Set<BuildTool> getBuildTools(Set<BuildToolDTO> recipe) {
         return recipe.stream().map(bt -> BuildTool.getOrCreate(bt.identifier, bt.version)).collect(Collectors.toSet());
     }
 
