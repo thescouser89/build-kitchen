@@ -23,6 +23,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
+import org.jboss.pnc.common.util.StringUtils;
+import org.jboss.pnc.common.util.UrlUtils;
 
 import java.util.Optional;
 
@@ -95,7 +97,7 @@ public class ScmInfo extends PanacheEntity {
     }
 
     public static String normalizeUrl(String url) {
-        return url; // TODO: normalizeURL
+        return StringUtils.stripSuffix(UrlUtils.keepHostAndPathOnly(url), ".git");
     }
 
     public static ScmInfo getOrCreate(
