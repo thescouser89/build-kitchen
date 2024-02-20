@@ -39,4 +39,12 @@ public class LookupResource implements Lookup {
                 .map(buildRecipeMapper::toResource)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BuildRecipeDTO> lookupByPurl(String purl) {
+        return BuildRecipe.findByPurl(purl)
+                .stream()
+                .map(buildRecipeMapper::toResource)
+                .collect(Collectors.toList());
+    }
 }

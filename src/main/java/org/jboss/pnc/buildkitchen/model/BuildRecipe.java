@@ -104,4 +104,13 @@ public class BuildRecipe extends PanacheEntity {
                   )
                 """, Parameters.with("nurl", normalizedUrl).and("revision", revision)).list();
     }
+
+    public static List<BuildRecipe> findByPurl(String purl) {
+        return find("""
+                FROM BuildRecipe r
+                JOIN r.builds b
+                JOIN b.builtArtifacts a
+                WHERE a.purl = :purl
+                """, Parameters.with("purl", purl)).list();
+    }
 }

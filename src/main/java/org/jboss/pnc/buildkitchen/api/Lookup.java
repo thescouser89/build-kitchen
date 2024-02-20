@@ -30,4 +30,8 @@ public interface Lookup {
     @Path("/by-scm-revision")
     List<BuildRecipeDTO> lookupByScmRevision(@QueryParam("url") String url, @QueryParam("revision") String revision);
 
+    @GET
+    @Path("/by-purl")
+    List<BuildRecipeDTO> lookupByPurl(@QueryParam("purl") String purl);
+
 }
