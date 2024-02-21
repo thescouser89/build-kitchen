@@ -97,6 +97,7 @@ public class ScmInfo extends PanacheEntity {
     }
 
     public static String normalizeUrl(String url) {
+        if (url == null) return null;
         return StringUtils.stripSuffix(UrlUtils.keepHostAndPathOnly(url), ".git");
     }
 
