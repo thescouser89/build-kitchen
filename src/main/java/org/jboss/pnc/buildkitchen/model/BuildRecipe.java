@@ -113,4 +113,16 @@ public class BuildRecipe extends PanacheEntity {
                 WHERE a.purl = :purl
                 """, Parameters.with("purl", purl)).list();
     }
+
+    public static List<BuildRecipe> findByScmUrlAndVersion(String url, String version) {
+        String normalizedUrl = ScmInfo.normalizeUrl(url);
+        return find("""
+                FROM BuildRecipe r
+                JOIN r.builds b
+                WHERE (
+                       r.scmInfo.buildScmUrl = :nurl
+                    OR r.scmInfo.originScmUrl = :nurl
+                  ) AND b.versionGenerated = :version
+                """, Parameters.with("nurl", normalizedUrl).and("version", version)).list();
+    }
 }
