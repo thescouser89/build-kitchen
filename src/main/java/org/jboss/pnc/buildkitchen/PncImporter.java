@@ -66,6 +66,11 @@ public class PncImporter {
 
     @Transactional
     public BuildRecipe importBuild(String buildId) {
+        Optional<org.jboss.pnc.buildkitchen.model.Build> exsisingBuild = org.jboss.pnc.buildkitchen.model.Build.pncBuild(buildId);
+        if (exsisingBuild.isPresent()) {
+            return exsisingBuild.get().recipe;
+        }
+
         try {
             log.info("Importing PNC build {}", buildId);
             Build pncBuild = getSuccessfulBuild(buildId);

@@ -18,6 +18,8 @@
 package org.jboss.pnc.buildkitchen.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.panache.common.Parameters;
+import io.vertx.codegen.Generator;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,6 +31,7 @@ import org.jboss.pnc.api.constants.BuildGenerator;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -91,5 +94,11 @@ public class Build extends PanacheEntity {
     @NotNull
     @ElementCollection
     public Set<String> buildTools = new HashSet<>();
+
+    public static Optional<Build> pncBuild(String buildId) {
+        return find("FROM Build b WHERE b.buildId = :buildId AND b.generator = :generator",
+                Parameters.with("buildId", buildId).and("generator", BuildGenerator.PNC))
+                .singleResultOptional();
+    }
 
 }
