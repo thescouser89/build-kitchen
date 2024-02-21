@@ -68,6 +68,7 @@ public class PncImporter {
     public BuildRecipe importBuild(String buildId) {
         Optional<org.jboss.pnc.buildkitchen.model.Build> exsisingBuild = org.jboss.pnc.buildkitchen.model.Build.pncBuild(buildId);
         if (exsisingBuild.isPresent()) {
+            log.info("Skipped importing already registered PNC build {}", buildId);
             return exsisingBuild.get().recipe;
         }
 
