@@ -81,9 +81,9 @@ public class ScmInfo extends PanacheEntity {
             String originScmUrl,
             String originCommitId,
             String originRevision) {
-        this.buildScmUrl = buildScmUrl;
+        this.buildScmUrl = normalizeUrl(buildScmUrl);
         this.buildCommitId = buildCommitId;
-        this.originScmUrl = originScmUrl;
+        this.originScmUrl = normalizeUrl(originScmUrl);
         this.originCommitId = originCommitId;
         this.originRevision = originRevision;
     }
