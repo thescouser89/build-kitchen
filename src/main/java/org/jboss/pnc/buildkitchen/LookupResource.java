@@ -50,9 +50,6 @@ public class LookupResource implements Lookup {
 
     @Override
     public List<BuildRecipeDTO> lookupByPurl(String purl) {
-        return BuildRecipe.findByPurl(purl)
-                .stream()
-                .map(buildRecipeMapper::toResource)
-                .collect(Collectors.toList());
+        return BuildRecipe.findByPurl(purl).stream().map(buildRecipeMapper::toResource).collect(Collectors.toList());
     }
 }

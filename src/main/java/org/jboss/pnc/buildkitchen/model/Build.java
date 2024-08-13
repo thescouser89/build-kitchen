@@ -96,9 +96,9 @@ public class Build extends PanacheEntity {
     public Set<String> buildTools = new HashSet<>();
 
     public static Optional<Build> pncBuild(String buildId) {
-        return find("FROM Build b WHERE b.buildId = :buildId AND b.generator = :generator",
-                Parameters.with("buildId", buildId).and("generator", BuildGenerator.PNC))
-                .singleResultOptional();
+        return find(
+                "FROM Build b WHERE b.buildId = :buildId AND b.generator = :generator",
+                Parameters.with("buildId", buildId).and("generator", BuildGenerator.PNC)).singleResultOptional();
     }
 
 }
